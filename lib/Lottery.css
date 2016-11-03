@@ -1,0 +1,83 @@
+/**
+ * @file MolaLottery
+ * @author ludafa<ludafa@outlook.com>
+ */
+.mola-lottery {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.mola-lottery-frame {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
+.mola-lottery-frame-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.mola-lottery-prizes {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 62.7%;
+}
+.mola-lottery-play {
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  z-index: 20;
+  top: 40%;
+  left: 40%;
+}
+.mola-lottery-pop-window {
+  z-index: 200;
+  position: fixed;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  align-items: center;
+  justify-content: center;
+}
+.mola-lottery-dialog {
+  position: relative;
+  width: 18.75rem;
+  height: 15rem;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100%;
+  z-index: 101;
+  border-radius: 5px;
+}
+.mola-lottery-dialog-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+}
+.mola-lottery-dialog-footer {
+  position: absolute;
+  display: flex;
+  top: 9.375rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: stretch;
+  justify-content: space-around;
+}
+.mola-lottery-dialog-footer >* {
+  flex: 1 1 50%;
+}
