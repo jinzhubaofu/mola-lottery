@@ -14,14 +14,18 @@
     "coveralls": "cat test/coverage/lcov/lcov.info | ./node_modules/.bin/coveralls",
     "docs": "esdoc -c esdoc.json"
   },
-  "keywords": ["mola"],
+  "keywords": [
+    "mola"
+  ],
   "authors": [
-      "ludafa <ludafa@outlook.com>"
+    "ludafa <ludafa@outlook.com>",
+    "jingyuanZhang"
   ],
   "license": "MIT",
   "dependencies": {
-    "melon": "^0.3.4",
-    "melon-core": "^0.3.2"
+    "inline-style-prefixer": "^2.0.4",
+    "jsonp-es6": "^1.0.0",
+    "mola": "^1.0.1"
   },
   "devDependencies": {
     "babel-istanbul": "^0.11.0",

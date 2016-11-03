@@ -1,0 +1,86 @@
+/**
+ * @file MolaLottery
+ * @author ludafa<ludafa@outlook.com>
+ */
+
+@require 'mola/lib/component/func.styl'
+
+.mola-lottery
+
+    position: relative
+    display: block
+    overflow: hidden
+
+    &-frame
+        position: relative
+        width: 100%
+        height: 0
+        padding-bottom: 100%
+        overflow: hidden
+
+        &-img
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            z-index: 1
+
+    &-prizes
+        width: 100%
+        height: 0
+        padding-bottom: 100%
+        margin: auto
+        background-repeat: no-repeat
+        background-position: center center
+        background-size: 62.7%
+
+    &-play
+        width: 20%
+        height: 20%
+        position: absolute
+        z-index: 20
+        top: 40%
+        left: 40%
+
+    &-pop-window
+        z-index: 200
+        position: fixed
+        display: flex
+        top: 0
+        bottom: 0
+        right: 0
+        left: 0
+        background-color: rgba(0, 0, 0, .8)
+        align-items: center;
+        justify-content: center;
+
+    &-dialog
+        position: relative;
+        width: pxTo6Rem(600)
+        height: pxTo6Rem(480)
+        background-repeat: no-repeat
+        background-position: center top
+        background-size: 100%
+        z-index: 101
+        border-radius: 5px
+
+        &-close
+            position: absolute
+            top: 0
+            right: 0
+            width: pxTo6Rem(60)
+            height: pxTo6Rem(60)
+
+        &-footer
+            position: absolute
+            display: flex
+            top: pxTo6Rem(300)
+            left: 0
+            right: 0
+            bottom: 0
+            align-items: stretch;
+            justify-content: space-around;
+
+            >*
+                flex: 1 1 50%;
