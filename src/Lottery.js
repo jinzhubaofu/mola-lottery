@@ -5,20 +5,17 @@
 
 import React, {Component, PropTypes} from 'react';
 import Prefixer from 'inline-style-prefixer';
-import {MOLA_COMPONENT_LEVEL_CONTAINER, registerComponent} from 'mola';
+import {registerComponent} from 'mola';
 import jsonp from 'jsonp-es6';
-
-export const type = 'Lottery';
-export const level = MOLA_COMPONENT_LEVEL_CONTAINER;
-
-const ROTATE_BASE_DEG = 1800;
-const ERROR_IMAGE = 'http://boscdn.bpc.baidu.com/mms-res/voicefe/activity/captain/react/404card.jpg';
+import {type, level} from './constants';
 
 const prefixer = new Prefixer({
     userAgent: navigator.userAgent
 });
 
-let guid = 1;
+function guid() {
+    return (+(Math.random() + '').substr(2, 8)).toString(36);
+}
 
 class Lottery extends Component {
 
@@ -27,11 +24,13 @@ class Lottery extends Component {
         super(...args);
 
         this.draw = this.draw.bind(this);
+        this.closeDialog = this.closeDialog.bind(this);
 
         this.state = {
             status: 'stopped',
             rotate: 0
         };
+
 
     }
 
@@ -45,17 +44,22 @@ class Lottery extends Component {
 
     startRotating() {
 
+        const rotateDegree = +this.props.rotateDegree;
+
         return new Promise(resolve => {
 
             this.setState({
                 status: 'drawing',
-                rotate: this.state.rotate + ROTATE_BASE_DEG
+                rotate: rotateDegree + this.state.rotate
             });
 
-            this.timer = setTimeout(() => {
-                this.timer = null;
-                resolve();
-            }, 3000);
+            this.timer = setTimeout(
+                () => {
+                    this.timer = null;
+                    resolve();
+                },
+                3000
+            );
 
         });
 
@@ -67,23 +71,22 @@ class Lottery extends Component {
 
             this.setState({
                 status: 'stopping',
-                rotate: ROTATE_BASE_DEG
+                rotate: +this.props.rotateDegree
                     + (Math.floor(this.state.rotate / 360) * 360)
                     + rotate
             });
 
-            this.timer = setTimeout(() => {
-
-                this.timer = null;
-
-                this.setState({
-                    status: 'stopped',
-                    rotate
-                });
-
-                resolve();
-
-            }, 4000);
+            this.timer = setTimeout(
+                () => {
+                    this.timer = null;
+                    this.setState({
+                        status: 'stopped',
+                        rotate
+                    });
+                    resolve();
+                },
+                4000
+            );
 
         });
 
@@ -115,7 +118,11 @@ class Lottery extends Component {
         } = this.props;
 
         // 数据请求：这个 promise 不会 reject
-        const promise = jsonp(datasource, {}, {timeout: 1600}).catch(error => {
+        const promise = jsonp(
+            datasource,
+            {},
+            {timeout: 1600}
+        ).catch(error => {
             return {
                 status: error.status || 500,
                 statusInfo: error.statusInfo || '服务繁忙，请稍候再试'
@@ -123,10 +130,11 @@ class Lottery extends Component {
         });
 
         // 请求 token
-        const token = this.token = guid++;
+        const token = this.token = guid();
 
         // 数据请求的同时把转盘转起来！我把转盘转上五环！
-        Promise.all([promise, this.startRotating()])
+        Promise
+            .all([promise, this.startRotating()])
 
             // 数据请求结束了，转盘也转够圈了，我们把转盘停下来
             .then(([data]) => {
@@ -178,37 +186,39 @@ class Lottery extends Component {
 
     }
 
+    closeDialog() {
+        this.setState({prize: null});
+    }
+
     renderDialog(prize) {
 
         if (!prize) {
             return null;
         }
 
-        const {
+        let errorImage = this.props.errorImage;
+
+        let {
             status,
             info
         } = prize;
 
-        let backgroundImage = ERROR_IMAGE;
+        let backgroundImage;
 
-        const buttons = [
+        let buttons = [
             <div
                 key="again"
                 className="mola-lottery-dialog-button-again"
-                onClick={() => {
-                    this.setState({
-                        prize: null
-                    });
-                }} />
+                onClick={this.closeDialog} />
         ];
 
         if (status === 0) {
 
-            const {
-                image,
+            let {
+                image = errorImage,
                 url,
                 type
-            } = info;
+            } = info.prize;
 
             if (type !== 'default' && url) {
                 buttons.push(
@@ -219,8 +229,11 @@ class Lottery extends Component {
                 );
             }
 
-            backgroundImage = image || backgroundImage;
+            backgroundImage = image;
 
+        }
+        else {
+            backgroundImage = errorImage;
         }
 
 
@@ -228,10 +241,12 @@ class Lottery extends Component {
             <div className="mola-lottery-pop-window">
                 <div
                     className="mola-lottery-dialog"
-                    style={{backgroundImage: `url(${backgroundImage})`}}>
+                    style={{
+                        backgroundImage: `url(${backgroundImage})`
+                    }}>
                     <div
                         className="mola-lottery-dialog-close"
-                        onClick={this.dialogClose} />
+                        onClick={this.closeDialog} />
                     <footer className="mola-lottery-dialog-footer">
                         {buttons}
                     </footer>
@@ -267,7 +282,7 @@ class Lottery extends Component {
                         className="mola-lottery-prizes"
                         style={{
                             backgroundImage: `url(${prizesImage})`,
-                            backgroundSize: `${prizesImageScale * 100}%`,
+                            backgroundSize: `${prizesImageScale}%`,
                             ...style
                         }} />
                     <div className="mola-lottery-play" onClick={this.draw} />
@@ -283,10 +298,6 @@ class Lottery extends Component {
 
 Lottery.displayName = 'Lottery';
 
-Lottery.defaultProps = {
-    prizesImageScale: 0.625
-};
-
 Lottery.propTypes = {
 
     // 框图片
@@ -296,14 +307,26 @@ Lottery.propTypes = {
     prizesImage: PropTypes.string.isRequired,
 
     // 奖品转盘图片缩放比例
-    prizesImageScale: PropTypes.number.isRequired,
+    prizesImageScale: PropTypes.string.isRequired,
 
     // 奖品种类数量
     prizeAmount: PropTypes.number.isRequired,
 
     // 数据源配置
-    datasource: PropTypes.string.isRequired
+    datasource: PropTypes.string.isRequired,
 
+    // 出错提示框背景图片
+    errorImage: PropTypes.string.isRequired,
+
+    // rotate degree
+    rotateDegree: PropTypes.string.isRequired
+
+};
+
+Lottery.defaultProps = {
+    prizesImageScale: '62.5',
+    errorImage: 'http://boscdn.bpc.baidu.com/mms-res/voicefe/activity/captain/react/404card.jpg',
+    rotateDegree: '1800'
 };
 
 export default registerComponent(type, level)(Lottery);

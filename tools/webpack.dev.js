@@ -14,7 +14,7 @@ const config = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel-loader'],
+                loaders: ['babel'],
                 exclude: /node_modules/
             },
             // 处理 stylus
