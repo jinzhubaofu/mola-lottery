@@ -311,10 +311,10 @@ Lottery.propTypes = {
     prizesImageScale: PropTypes.string.isRequired,
 
     // 奖品种类数量
-    prizeAmount: PropTypes.number.isRequired,
+    prizeAmount: PropTypes.string.isRequired,
 
     // 数据源配置
-    datasource: PropTypes.string.isRequired,
+    datasource: PropTypes.string,
 
     // 出错提示框背景图片
     errorImage: PropTypes.string.isRequired,

@@ -1,6 +1,6 @@
 {
     "name": "mola-lottery",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A MOLA Lottery Component",
     "main": "lib/Lottery.js",
     "scripts": {
