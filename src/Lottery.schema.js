@@ -5,6 +5,16 @@
 
 export {level, type} from './constants';
 
+export const editorProps = {
+    droppable: false,
+    resizable: 'none',
+    movable: false,
+    selectable: true,
+    style: {
+        width: '375px'
+    }
+};
+
 export default {
     type: 'object',
     properties: {

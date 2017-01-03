@@ -261,7 +261,8 @@ class Lottery extends Component {
         const {
             frameImage,
             prizesImage,
-            prizesImageScale
+            prizesImageScale,
+            style = null
         } = this.props;
 
         const {
@@ -270,10 +271,9 @@ class Lottery extends Component {
             prize
         } = this.state;
 
-        const style = prefixer.prefix(this.getGiftStyle(status, rotate));
 
         return (
-            <div className="mola-lottery">
+            <div className="mola-lottery" style={style}>
                 <div className="mola-lottery-frame">
                     <img
                         src={frameImage}
@@ -283,13 +283,14 @@ class Lottery extends Component {
                         style={{
                             backgroundImage: `url(${prizesImage})`,
                             backgroundSize: `${prizesImageScale}%`,
-                            ...style
+                            ...prefixer.prefix(
+                                this.getGiftStyle(status, rotate)
+                            )
                         }} />
                     <div className="mola-lottery-play" onClick={this.draw} />
                 </div>
                 {this.renderDialog(prize)}
             </div>
-
         );
 
     }
