@@ -22,16 +22,16 @@ export default {
             title: '框背景图片',
             type: 'string',
             format: 'uri',
-            default: 'http://boscdn.bpc.baidu.com/mms-res/captain/mola-lottery/frame.png'
+            default: 'http://gss3.bdstatic.com/5foUcz3n1MgCo2Kml5_Y_D3/static/asset/activity/supergirl/turnTable/img/kuangs1.5c709d00.png'
         },
         prizesImage: {
             title: '奖品图片',
             type: 'string',
             format: 'uri',
-            default: 'http://boscdn.bpc.baidu.com/mms-res/captain/mola-lottery/prize.png'
+            default: 'http://gss3.bdstatic.com/5foUcz3n1MgCo2Kml5_Y_D3/static/asset/activity/supergirl/turnTable/img/gifts.95173542.png'
         },
         prizesImageScale: {
-            title: '奖品图片绽放比例',
+            title: '奖品图片缩放比例',
             type: 'string',
             format: 'numeric',
             formatMinimum: '1',
