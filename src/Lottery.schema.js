@@ -33,7 +33,7 @@ export default {
         prizesImageScale: {
             title: '奖品图片绽放比例',
             type: 'string',
-            format: 'numberic',
+            format: 'numeric',
             formatMinimum: '1',
             formatMaximum: '100',
             default: '62.5'
@@ -41,7 +41,7 @@ export default {
         prizeAmount: {
             title: '奖品数',
             type: 'string',
-            format: 'numberic',
+            format: 'numeric',
             formatMinimum: '4',
             formatMaximum: '12',
             default: '8'
@@ -62,7 +62,7 @@ export default {
         rotateDegree: {
             title: '抽奖时旋转角度',
             type: 'string',
-            format: 'numberic',
+            format: 'numeric',
             default: '1800'
         }
     },
