@@ -119,7 +119,7 @@ class Lottery extends Component {
 
         // 数据请求：这个 promise 不会 reject
         const promise = jsonp(
-            datasource,
+            datasource.endpoint,
             {},
             {timeout: 1600}
         ).catch(error => {
@@ -314,7 +314,9 @@ Lottery.propTypes = {
     prizeAmount: PropTypes.string.isRequired,
 
     // 数据源配置
-    datasource: PropTypes.string,
+    datasource: PropTypes.shape({
+        endpoint: PropTypes.string.isRequired
+    }),
 
     // 出错提示框背景图片
     errorImage: PropTypes.string.isRequired,

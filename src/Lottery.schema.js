@@ -48,7 +48,20 @@ export default {
         },
         datasource: {
             title: '数据源',
-            type: 'string',
+            type: 'object',
+            properties: {
+                id: {
+                    type: 'integer',
+                    minimum: 0
+                },
+                name: {
+                    type: 'string'
+                },
+                endpoint: {
+                    type: 'string'
+                }
+            },
+            required: ['id', 'name', 'endpoint'],
             meta: {
                 type: 'captain/activity-service/lottery'
             }
