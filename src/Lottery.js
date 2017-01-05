@@ -118,16 +118,13 @@ class Lottery extends Component {
         } = this.props;
 
         // 数据请求：这个 promise 不会 reject
-        const promise = jsonp(
-            datasource.endpoint,
-            {},
-            {timeout: 1600}
-        ).catch(error => {
-            return {
-                status: error.status || 500,
-                statusInfo: error.statusInfo || '服务繁忙，请稍候再试'
-            };
-        });
+        const promise = jsonp(datasource, {}, {timeout: 1600})
+            .catch(
+                error => ({
+                    status: error.status || 500,
+                    statusInfo: error.statusInfo || '服务繁忙，请稍候再试'
+                })
+            );
 
         // 请求 token
         const token = this.token = guid();
@@ -148,8 +145,9 @@ class Lottery extends Component {
                     prizeAmount
                 );
 
-                // 这里我们最终是需要 API 的返回数据的
-                return this.stopRotating(rotate)
+                return this
+                    // 这里我们最终是需要 API 的返回数据的
+                    .stopRotating(rotate)
                     // 转完了来个弹窗提示
                     .then(() => {
                         this.setState({
@@ -314,15 +312,16 @@ Lottery.propTypes = {
     prizeAmount: PropTypes.string.isRequired,
 
     // 数据源配置
-    datasource: PropTypes.shape({
-        endpoint: PropTypes.string.isRequired
-    }),
+    datasource: PropTypes.string.isRequired,
 
     // 出错提示框背景图片
     errorImage: PropTypes.string.isRequired,
 
+    // top: PropTypes.string.isRequired,
+
     // rotate degree
     rotateDegree: PropTypes.string.isRequired
+
 
 };
 
