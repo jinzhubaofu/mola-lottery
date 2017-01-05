@@ -5,8 +5,8 @@
     "main": "lib/Lottery.js",
     "scripts": {
         "start": "NODE_ENV=dev node tools/server.js",
-        "build": "rimraf lib & NODE_ENV=production gulp build",
-        "lint": "fecs src",
+        "build": "npm run lint && rimraf lib && NODE_ENV=production gulp build",
+        "lint": "fecs",
         "prepublish": "npm run lint && npm run build",
         "test": "NODE_ENV=test karma start ./test/karma.local.conf.js",
         "test-ci": "NODE_ENV=test karma start ./test/karma.travis.conf.js",

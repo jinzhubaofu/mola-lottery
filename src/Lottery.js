@@ -120,10 +120,12 @@ class Lottery extends Component {
         // 数据请求：这个 promise 不会 reject
         const promise = jsonp(datasource, {}, {timeout: 1600})
             .catch(
-                error => ({
-                    status: error.status || 500,
-                    statusInfo: error.statusInfo || '服务繁忙，请稍候再试'
-                })
+                error => {
+                    return {
+                        status: error.status || 500,
+                        statusInfo: error.statusInfo || '服务繁忙，请稍候再试'
+                    };
+                }
             );
 
         // 请求 token

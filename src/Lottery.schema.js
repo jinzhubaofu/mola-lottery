@@ -19,32 +19,32 @@ export default {
     type: 'object',
     properties: {
         frameImage: {
-            title: '框背景图片',
-            type: 'string',
-            format: 'uri',
-            default: 'http://gss3.bdstatic.com/5foUcz3n1MgCo2Kml5_Y_D3/static/asset/activity/supergirl/turnTable/img/kuangs1.5c709d00.png'
+            'title': '框背景图片',
+            'type': 'string',
+            'format': 'uri',
+            'default': 'http://gss3.bdstatic.com/5foUcz3n1MgCo2Kml5_Y_D3/static/asset/activity/supergirl/turnTable/img/kuangs1.5c709d00.png'
         },
         prizesImage: {
-            title: '奖品图片',
-            type: 'string',
-            format: 'uri',
-            default: 'http://gss3.bdstatic.com/5foUcz3n1MgCo2Kml5_Y_D3/static/asset/activity/supergirl/turnTable/img/gifts.95173542.png'
+            'title': '奖品图片',
+            'type': 'string',
+            'format': 'uri',
+            'default': 'http://gss3.bdstatic.com/5foUcz3n1MgCo2Kml5_Y_D3/static/asset/activity/supergirl/turnTable/img/gifts.95173542.png'
         },
         prizesImageScale: {
-            title: '奖品图片缩放比例',
-            type: 'string',
-            format: 'numeric',
-            formatMinimum: '1',
-            formatMaximum: '100',
-            default: '62.5'
+            'title': '奖品图片缩放比例',
+            'type': 'string',
+            'format': 'numeric',
+            'formatMinimum': '1',
+            'formatMaximum': '100',
+            'default': '62.5'
         },
         prizeAmount: {
-            title: '奖品数',
-            type: 'string',
-            format: 'numeric',
-            formatMinimum: '4',
-            formatMaximum: '12',
-            default: '8'
+            'title': '奖品数',
+            'type': 'string',
+            'format': 'numeric',
+            'formatMinimum': '4',
+            'formatMaximum': '12',
+            'default': '8'
         },
 
         // 这里的数据源，只保存一个数据服务的 id;
@@ -70,16 +70,16 @@ export default {
             }
         },
         errorImage: {
-            title: '出错时弹框背景图片',
-            type: 'string',
-            format: 'uri',
-            default: 'http://boscdn.bpc.baidu.com/mms-res/voicefe/activity/captain/react/404card.jpg'
+            'title': '出错时弹框背景图片',
+            'type': 'string',
+            'format': 'uri',
+            'default': 'http://boscdn.bpc.baidu.com/mms-res/voicefe/activity/captain/react/404card.jpg'
         },
         rotateDegree: {
-            title: '抽奖时旋转角度',
-            type: 'string',
-            format: 'numeric',
-            default: '1800'
+            'title': '抽奖时旋转角度',
+            'type': 'string',
+            'format': 'numeric',
+            'default': '1800'
         }
     },
     required: [
