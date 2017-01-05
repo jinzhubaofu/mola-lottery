@@ -62,9 +62,21 @@ export default {
                 },
                 name: {
                     type: 'string'
+                },
+                sources: {
+                    type: 'object',
+                    properties: {
+                        preview: {
+                            type: 'string'
+                        },
+                        prodution: {
+                            type: 'string'
+                        }
+                    },
+                    required: ['production']
                 }
             },
-            required: ['id', 'name'],
+            required: ['id', 'name', 'sources'],
             media: {
                 type: 'captain/activity-service/lottery'
             }
