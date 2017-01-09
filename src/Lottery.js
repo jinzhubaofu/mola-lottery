@@ -215,7 +215,7 @@ class Lottery extends Component {
         if (status === 0) {
 
             let {
-                image = errorImage,
+                dialogImg = errorImage,
                 url,
                 type
             } = info.prize;
@@ -229,7 +229,7 @@ class Lottery extends Component {
                 );
             }
 
-            backgroundImage = image;
+            backgroundImage = dialogImg;
 
         }
         else {
