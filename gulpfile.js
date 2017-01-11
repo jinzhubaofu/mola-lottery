@@ -9,6 +9,9 @@ const stylus = require('gulp-stylus');
 const nib = require('nib');
 const sourcemaps = require('gulp-sourcemaps');
 const path = require('path');
+const webpack = require('webpack');
+const conf = require('./tools/webpack.prod');
+const gutil = require('gulp-util');
 
 gulp.task('babel', function () {
     return gulp.src('src/**/*.js')
@@ -16,6 +19,22 @@ gulp.task('babel', function () {
         .pipe(babel())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('lib'));
+});
+
+gulp.task('webpack', ['babel'], function (callback) {
+
+    return webpack(conf, (error, stats) => {
+
+        if (error) {
+            throw new gutil.PluginError('webpack', error);
+        }
+
+        gutil.log('webpack', stats.toString());
+
+        callback();
+
+    });
+
 });
 
 gulp.task('stylus', function () {
@@ -34,6 +53,6 @@ gulp.task('css', function () {
         .pipe(gulp.dest('lib'));
 });
 
-gulp.task('build', ['babel', 'stylus', 'css']);
+gulp.task('build', ['webpack', 'stylus', 'css']);
 
 gulp.task('default', ['build']);

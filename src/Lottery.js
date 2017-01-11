@@ -4,18 +4,53 @@
  */
 
 import React, {Component, PropTypes} from 'react';
-import Prefixer from 'inline-style-prefixer';
 import {registerComponent} from 'mola';
 import jsonp from 'jsonp-es6';
 import {type, level} from './constants';
 
-const prefixer = new Prefixer({
-    userAgent: navigator.userAgent
-});
-
 function guid() {
     return (+(Math.random() + '').substr(2, 8)).toString(36);
 }
+
+function firstLetterToUpperCase(str) {
+    return `${str[0].toUpperCase()}${str.slice(1)}`;
+}
+
+const prefix = (function () {
+
+    const prefixes = [
+        'Webkit',
+        'Moz',
+        'ms',
+        'O'
+    ];
+
+    return styles => {
+
+        if (!styles) {
+            return styles;
+        }
+
+        let result =  Object
+            .keys(styles)
+            .reduce(
+                (nextStyles, key) => prefixes
+                    .reduce(
+                        (nextStyles, prefix) => {
+                            nextStyles[
+                                `${prefix}${firstLetterToUpperCase(key)}`
+                            ] = styles[key];
+                            return nextStyles;
+                        },
+                        nextStyles
+                    ),
+                {}
+            );
+
+        return result;
+    };
+
+})();
 
 class Lottery extends Component {
 
@@ -283,9 +318,7 @@ class Lottery extends Component {
                         style={{
                             backgroundImage: `url(${prizesImage})`,
                             backgroundSize: `${prizesImageScale}%`,
-                            ...prefixer.prefix(
-                                this.getGiftStyle(status, rotate)
-                            )
+                            ...prefix(this.getGiftStyle(status, rotate))
                         }} />
                     <div className="mola-lottery-play" onClick={this.draw} />
                 </div>
