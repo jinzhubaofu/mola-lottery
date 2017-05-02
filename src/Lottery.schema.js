@@ -11,7 +11,9 @@ export const editorProps = {
     movable: 'y',
     selectable: true,
     style: {
-        width: '375px'
+        width: '375px',
+        height: '375px',
+        zIndex: 0
     }
 };
 
