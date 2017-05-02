@@ -8,7 +8,7 @@ export {level, type} from './constants';
 export const editorProps = {
     droppable: false,
     resizable: 'none',
-    movable: false,
+    movable: 'y',
     selectable: true,
     style: {
         width: '375px'
@@ -18,6 +18,13 @@ export const editorProps = {
 export default {
     type: 'object',
     properties: {
+        top: {
+            'title': 'top',
+            'type': 'string',
+            'format': 'numeric',
+            'formatMinimum': '0',
+            'default': '0'
+        },
         frameImage: {
             'title': '框背景图片',
             'type': 'string',

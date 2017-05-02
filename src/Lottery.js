@@ -4,7 +4,7 @@
  */
 
 import React, {Component, PropTypes} from 'react';
-import {registerComponent} from 'mola';
+import {registerComponent, px2rem} from 'mola';
 import jsonp from 'jsonp-es6';
 import {type, level} from './constants';
 
@@ -297,7 +297,8 @@ class Lottery extends Component {
             frameImage,
             prizesImage,
             prizesImageScale,
-            style = null
+            style = null,
+            top
         } = this.props;
 
         const {
@@ -308,7 +309,12 @@ class Lottery extends Component {
 
 
         return (
-            <div className="mola-lottery" style={style}>
+            <div
+                className="mola-lottery"
+                style={{
+                    ...style,
+                    top: px2rem(top)
+                }}>
                 <div className="mola-lottery-frame">
                     <img
                         src={frameImage}
@@ -333,6 +339,8 @@ class Lottery extends Component {
 Lottery.displayName = 'Lottery';
 
 Lottery.propTypes = {
+
+    top: PropTypes.string.isRequired,
 
     // 框图片
     frameImage: PropTypes.string.isRequired,
